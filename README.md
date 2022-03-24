@@ -1,5 +1,5 @@
 # Object Pool Design Pattern with Kotlin
-Demonstration of Object Pool Design Pattern using Kotlin language and Coroutine.
+Demonstration of Threade Safe Object Pool Design Pattern using Kotlin language and Coroutine.
 
 ### Abstract
 
