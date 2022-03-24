@@ -1,0 +1,27 @@
+@startuml
+
+class Pool {
+    - {static} instance: Pool
+    - poolSize: Int
+    - _available: Connection[]
+    - _inUse: Connection[]
+    ----
+    +getConnection(): Connection
+    +releaseConnection(item: Connection)
+    +availableSize(): Int
+    +usingSize(): Int
+    -{static} Pool getInstance()
+    -updatePoolObjectCount(difference: Int)
+    -createInitialObjects()
+}
+class Connection {
+  + String title
+}
+
+class Client {
+    - pool: Pool
+}
+
+Pool "1" *-down-> "*" Connection
+Client -down-> Pool
+@enduml
