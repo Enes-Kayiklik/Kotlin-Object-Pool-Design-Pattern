@@ -1,0 +1,39 @@
+== Object Pool Design Pattern with Kotlin
+
+Demonstration of Thread Safe Object Pool Design Pattern using Kotlin
+language and Coroutine.
+
+=== Abstract
+
+____
+The object pool pattern is a design pattern that can improve performance
+when working with classes that are slow to instantiate. Rather than
+constructing new objects, reusable objects are retrieved from the pool
+as required. When no longer needed, objects are returned to the pool
+rather than being destroyed. - *_Singleton_*: Singleton is a creational
+design pattern, which ensures that only one object of its kind exists
+and provides a single point of access to it for any other code.
+Singleton has almost the same pros and cons as global variables.
+Although they’re very useful for storing shared data where you need it,
+they break the modularity of your code and unit testing becomes harder -
+*_Pool_*: The most important class. It works as a controller to handle
+clients’ requests for reusable objects. - _**Object**s_: The reusable
+objects that are expensive or slow to instantiate. - *_Client_*: The
+class that requests to use object(s) in the pool.
+
+http://www.blackwasp.co.uk/ObjectPool.aspx[Blackwasp]
+____
+
+=== UML Diagram
+
+image::uml/UML.png[UML Diagram for This Example of Object Pool Design
+Pattern]
+
+=== References
+
+* http://www.blackwasp.co.uk/ObjectPool.aspx[Blackwasp]
+* https://alimozdemir.com/posts/design-pattern-serisi-2-object-pool/[Alim
+Özdemir]
+* https://github.com/ttnny/object-pool-example[GitHub - ttny]
+* https://plantuml.com/[Plant UML]
+* https://real-world-plantuml.com/[Real World Plant UML]
