@@ -6,7 +6,9 @@ import model.Connection
 import pool.Pool
 
 /**
- * Only one Pool instance using at the same time and 4 different thread active.
+ * Object Pool, which has 3 pre-prepared objects, works in 4 different threads.
+ * The Object Pool object defined outside the threads receives or leaves
+ * objects with 50% probability for each thread.
  **/
 suspend fun main() {
     val instance = Pool.getInstance(3)

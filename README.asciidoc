@@ -10,19 +10,40 @@ The object pool pattern is a design pattern that can improve performance
 when working with classes that are slow to instantiate. Rather than
 constructing new objects, reusable objects are retrieved from the pool
 as required. When no longer needed, objects are returned to the pool
-rather than being destroyed. - *_Singleton_*: Singleton is a creational
+rather than being destroyed.
+
+*_Singleton_*: Singleton is a creational
 design pattern, which ensures that only one object of its kind exists
 and provides a single point of access to it for any other code.
 Singleton has almost the same pros and cons as global variables.
 Although they’re very useful for storing shared data where you need it,
 they break the modularity of your code and unit testing becomes harder -
+
 *_Pool_*: The most important class. It works as a controller to handle
-clients’ requests for reusable objects. - _**Object**s_: The reusable
-objects that are expensive or slow to instantiate. - *_Client_*: The
-class that requests to use object(s) in the pool.
+clients’ requests for reusable objects.
+
+*_Objects_*: The reusable objects that are expensive or slow to instantiate.
+
+*_Client_*: The class that requests to use object(s) in the pool.
 
 http://www.blackwasp.co.uk/ObjectPool.aspx[Blackwasp]
 ____
+=== Scenarios
+*_Scenario 1_*: 10 pre-prepared objects are kept in the Object Pool.
+But no more than 10 objects are allowed. If 10 objects are in use, it is
+ensured that the requesters are waited. A request was made by starting
+15 separate threads. Only 10 of these 15 threads were able to retrieve
+objects from the object pool and left the object pool back after use.
+Out of 15 threads, 5 of which could not receive an object were made to wait
+and continued to run when the object pool responded to the object request.
+
+*_Scenario 2_*: There is a reference to the object pool object defined as Singleton in each thread.
+ All threads can change the object pool size within themselves.
+ Since the Object pool is singleton, other instances are also affected by this situation.
+ This process was carried out using 4 different threads.
+
+*_Scenario 3_*: Object Pool, which has 3 pre-prepared objects, works in 4 different threads.
+The Object Pool object defined outside the threads receives or leaves objects with 50% probability for each thread.
 
 === UML Diagram
 

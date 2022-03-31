@@ -6,7 +6,10 @@ import model.Connection
 import pool.Pool
 
 /**
- * Four Pool instance using at the same time with 4 different thread and pool size changing.
+ * There is a reference to the object pool object defined as Singleton in each thread.
+ * All threads can change the object pool size within themselves.
+ * Since the Object pool is singleton, other instances are also affected by this situation.
+ * This process was carried out using 4 different threads.
  **/
 suspend fun main() {
     CoroutineScope(Dispatchers.IO).launch {
