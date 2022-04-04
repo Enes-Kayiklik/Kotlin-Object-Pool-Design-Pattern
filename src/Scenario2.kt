@@ -13,92 +13,45 @@ import pool.Pool
  **/
 suspend fun main() {
     CoroutineScope(Dispatchers.IO).launch {
-        val usingInstances = mutableListOf<Connection>()
-        while (true) {
-            val instance = Pool.getInstance((3..5).random())
-            delay(2000L)
-            println("Pool Size --> ${instance.poolSize} *** Available Size --> ${instance.availableSize()} *** Using Size --> ${instance.usingSize()}")
-            if ((0..1).random() == 1) {
-                instance.getConnection()?.also {
-                    println("---> Borrowed one Object From Scope 1 <---")
-                    usingInstances.add(it)
-                } ?: println("---- Available List is Empty From Scope 1 ----")
-            } else {
-                if (usingInstances.isNotEmpty()) {
-                    val remove = usingInstances[0]
-                    usingInstances.removeAt(0)
-                    instance.releaseConnection(remove)
-                    println("---> Released one Object From Scope 1 <---")
-                }
-            }
-        }
+        interact("1", 2F)
+
     }
 
     CoroutineScope(Dispatchers.IO).launch {
-        val usingInstances = mutableListOf<Connection>()
-        while (true) {
-            val instance = Pool.getInstance((3..5).random())
-            delay(500L)
-            println("Pool Size --> ${instance.poolSize} *** Available Size --> ${instance.availableSize()} *** Using Size --> ${instance.usingSize()}")
-            if ((0..1).random() == 1) {
-                instance.getConnection()?.also {
-                    println("---> Borrowed one Object From Scope 2 <---")
-                    usingInstances.add(it)
-                } ?: println("---- Available List is Empty From Scope 2 ----")
-            } else {
-                if (usingInstances.isNotEmpty()) {
-                    val remove = usingInstances[0]
-                    usingInstances.removeAt(0)
-                    instance.releaseConnection(remove)
-                    println("---> Released one Object From Scope 2 <---")
-                }
-            }
-        }
+        interact("2", 0.5F)
+
     }
 
     CoroutineScope(Dispatchers.IO).launch {
-        val usingInstances = mutableListOf<Connection>()
-        while (true) {
-            val instance = Pool.getInstance((3..5).random())
-            delay(1000L)
-            println("Pool Size --> ${instance.poolSize} *** Available Size --> ${instance.availableSize()} *** Using Size --> ${instance.usingSize()}")
-            if ((0..1).random() == 1) {
-                instance.getConnection()?.also {
-                    println("---> Borrowed one Object From Scope 3 <---")
-                    usingInstances.add(it)
-                } ?: println("---- Available List is Empty From Scope 3 ----")
-            } else {
-                if (usingInstances.isNotEmpty()) {
-                    val remove = usingInstances[0]
-                    usingInstances.removeAt(0)
-                    instance.releaseConnection(remove)
-                    println("---> Released one Object From Scope 3 <---")
-                }
-            }
-        }
+        interact("3", 1F)
+
     }
 
     CoroutineScope(Dispatchers.IO).launch {
-        val usingInstances = mutableListOf<Connection>()
-        while (true) {
-            val instance = Pool.getInstance((3..5).random())
-            delay(3000L)
-            println("Pool Size --> ${instance.poolSize} *** Available Size --> ${instance.availableSize()} *** Using Size --> ${instance.usingSize()}")
-            if ((0..1).random() == 1) {
-                instance.getConnection()?.also {
-                    println("---> Borrowed one Object From Scope 4 <---")
-                    usingInstances.add(it)
-                } ?: println("---- Available List is Empty From Scope 4 ----")
-            } else {
-                if (usingInstances.isNotEmpty()) {
-                    val remove = usingInstances[0]
-                    usingInstances.removeAt(0)
-                    instance.releaseConnection(remove)
-                    println("---> Released one Object From Scope 4 <---")
-                }
-            }
-        }
+        interact("4", 3F)
     }
 
     delay(600_000)
+}
+
+private suspend fun interact(scopeName: String, delayInSec: Float) {
+    val usingInstances = mutableListOf<Connection>()
+    while (true) {
+        val instance = Pool.getInstance((3..5).random())
+        delay((delayInSec * 1000L).toLong())
+        println("Pool Size --> ${instance.poolSize} *** Available Size --> ${instance.availableSize()} *** Using Size --> ${instance.usingSize()}")
+        if ((0..1).random() == 1) {
+            instance.getConnection()?.also {
+                println("---> Borrowed one Object From Scope $scopeName <---")
+                usingInstances.add(it)
+            } ?: println("---- Available List is Empty From Scope $scopeName ----")
+        } else {
+            if (usingInstances.isNotEmpty()) {
+                val remove = usingInstances[0]
+                usingInstances.removeAt(0)
+                instance.releaseConnection(remove)
+                println("---> Released one Object From Scope $scopeName <---")
+            }
+        }
+    }
 }

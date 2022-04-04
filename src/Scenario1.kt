@@ -12,173 +12,64 @@ import pool.Pool
  * could not receive an object were made to wait and continued to run when the object
  * pool responded to the object request.
  **/
+private val instance = Pool.getInstance(10)
 suspend fun main() {
-    val instance = Pool.getInstance(10)
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 1 <---")
-        delay(10_000)
-        instance.releaseConnection(connectionObject)
-        println("---> Released one Object From Scope 1 <---")
+        interact("1", 10F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 2 <---")
-        delay(7_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 2 <---")
+        interact("2", 7F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 3 <---")
-        delay(8_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 3 <---")
+        interact("3", 8F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 4 <---")
-        delay(11_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 4 <---")
+        interact("4", 11F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 5 <---")
-        delay(7_100)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 5 <---")
+        interact("5", 7.1F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 6 <---")
-        delay(8_100)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 6 <---")
+        interact("6", 8.1F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 7 <---")
-        delay(8_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 7 <---")
+        interact("7", 8F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 8 <---")
-        delay(9_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 8 <---")
+        interact("8", 9F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 9 <---")
-        delay(6_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 9 <---")
+        interact("9", 6F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 10 <---")
-        delay(5_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 10 <---")
+        interact("10", 5F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 11 <---")
-        delay(13_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 11 <---")
+        interact("11", 13F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 12 <---")
-        delay(12_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 12 <---")
+        interact("12", 12F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 13 <---")
-        delay(10_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 13 <---")
+        interact("13", 10F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 14 <---")
-        delay(9_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 14 <---")
+        interact("14", 14F)
     }
     CoroutineScope(Dispatchers.IO).launch {
-        var connectionObject = instance.getConnection()
-        while (connectionObject == null) {
-            delay(10)
-            connectionObject = instance.getConnection()
-        }
-        println("---> Borrowed one Object From Scope 15 <---")
-        delay(15_000)
-        instance.releaseConnection(connectionObject!!)
-        println("---> Released one Object From Scope 15 <---")
+        interact("15", 15F)
     }
-
     delay(600_000)
+}
+
+private suspend fun interact(scopeName: String, delayInSec: Float) {
+    var connectionObject = instance.getConnection()
+    while (connectionObject == null) {
+        delay(10)
+        connectionObject = instance.getConnection()
+    }
+    println("---> Borrowed one Object From Scope $scopeName <---")
+    delay((delayInSec * 1000).toLong())
+    instance.releaseConnection(connectionObject)
+    println("---> Released one Object From Scope $scopeName <---")
 }
